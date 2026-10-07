@@ -2,6 +2,11 @@ import { useEffect, useState } from 'react'
 import ProductList from './ProductList'
 import './App.css'
 
+const apiBaseUrl = import.meta.env.VITE_API_URL
+  || (import.meta.env.DEV
+    ? 'http://localhost:3000'
+    : 'https://ecommerece-1-0z99.onrender.com')
+
 function App() {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -12,7 +17,7 @@ function App() {
 
     async function loadProducts() {
       try {
-        const response = await fetch('http://localhost:3000/api/products', {
+        const response = await fetch(`${apiBaseUrl}/api/products`, {
           signal: controller.signal,
         })
 
